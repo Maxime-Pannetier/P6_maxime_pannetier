@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config(); // lis fichier .env et stock variable dans app
 
 
 
@@ -27,7 +28,7 @@ app.use('/api/sauces', routeSauces);
 
 
 // connexion a mongoDB
-mongoose.connect('mongodb+srv://MaximePANNETIER:OggyPANNETIER94@cluster0.kfstn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(process.env.DB_CONNECTION,
 {
   useNewUrlParser: true,
   useUnifiedTopology: true})

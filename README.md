@@ -1,1 +1,1 @@
-# P6_maxime_pannetier
+ajouter fichier .env a la racine du fichier "backend"

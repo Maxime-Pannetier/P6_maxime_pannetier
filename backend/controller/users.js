@@ -7,11 +7,11 @@ const jwt = require('jsonwebtoken');
 
 // signup = creation compte utilisateur
 exports.signup = (req, res, next) => {
-  bcrypt.hash(req.body.password, 10)
+  bcrypt.hash(req.body.password, 10) // hash mdp
     .then(hash => {
       const user = new Users({
         email: req.body.email,
-        password: hash
+        password: hash //on utilise bien le hash
       });
       user.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -31,7 +31,7 @@ exports.signup = (req, res, next) => {
     if (!user) {
       return res.status(401).json({ error: 'Utilisateur non trouvé !' });
     }
-    bcrypt.compare(req.body.password, user.password)
+    bcrypt.compare(req.body.password, user.password) // compare mdp clair + hashé
       .then(valid => {
         if (!valid) {
           return res.status(401).json({ error: 'Mot de passe incorrect !' });
@@ -40,7 +40,7 @@ exports.signup = (req, res, next) => {
           userId: user._id,
           token: jwt.sign(
             { userId: user._id },
-            'RANDOM_TOKEN_SECRET',
+            process.env.JWT_SECRET,
             { expiresIn: '24h' }
           )
         });

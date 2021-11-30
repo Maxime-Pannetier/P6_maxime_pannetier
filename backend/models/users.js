@@ -1,7 +1,7 @@
 //DATA MODELSUSERS
 
 const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator'); // email unique
 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
